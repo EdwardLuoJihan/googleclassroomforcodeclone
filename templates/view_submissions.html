@@ -1,0 +1,28 @@
+<h2>Assignment: {{ assignment.title }}</h2>
+
+<p>Submitted by {{ submitted_students }} students.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Submission Time</th>
+            <th>Grade</th>
+            <th>Feedback</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for submission in submissions %}
+        <tr>
+            <td>{{ submission.student.username }}</td>
+            <td>{{ submission.timestamp }}</td>
+            <td>{{ submission.grade }}</td>
+            <td>{{ submission.feedback }}</td>
+            <td>
+                <a href="{{ url_for('view_submission', submission_id=submission.id) }}">Mark</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

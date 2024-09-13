@@ -1,0 +1,48 @@
+{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        <div class="flashes">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Coding Assignment App</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='scripts.js') }}" defer></script> -->
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                {% if current_user.is_authenticated %}
+                    {% if current_user.role == 'teacher' %}
+                        <li><a href="{{ url_for('teacher_dashboard') }}">Teacher Dashboard</a></li>
+                    {% elif current_user.role == 'student' %}
+                        <li><a href="{{ url_for('student_dashboard') }}">Student Dashboard</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; {{ year }} Flask Coding Assignment App</p>
+    </footer>
+</body>
+</html>
