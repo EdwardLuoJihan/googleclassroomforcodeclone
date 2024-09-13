@@ -9,7 +9,12 @@
             {% for assignment in assignments %}
                 <li>
                     {{ assignment.title }} - Due: {{ assignment.deadline }}
+                    {% if current_user.role == 'teacher' or current_user.role == 'admin' %}
                     <a href="{{ url_for('view_submissions', assignment_id=assignment.id) }}" class="btn">View Submissions</a>
+                    {% else %}
+                    <a href="{{ url_for('submit_assignment', assignment_id=assignment.id) }}" class="btn">Submit</a>
+
+                    {% endif %}
                     <!-- Optionally add other details or links -->
                 </li>
             {% endfor %}

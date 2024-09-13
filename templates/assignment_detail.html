@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <h2>Submit Assignment: {{ assignment.title }}</h2>
+    <p>Assignment Details:<br>{{assignment.description}}</p>
     <form method="POST" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <div class="form-group">

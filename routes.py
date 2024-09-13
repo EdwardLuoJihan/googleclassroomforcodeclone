@@ -10,7 +10,7 @@ from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt(app)
 
-UPLOAD_FOLDER = 'assignments/submissions/'
+UPLOAD_FOLDER = 'assignments/submissions'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/reset")
