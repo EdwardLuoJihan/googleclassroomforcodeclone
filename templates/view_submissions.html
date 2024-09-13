@@ -1,6 +1,9 @@
 <h2>Assignment: {{ assignment.title }}</h2>
 
-<p>Submitted by {{ submitted_students }} students.</p>
+<p>{{assignment.description}}</p>
+<p>Due on: {{assignment.deadline}}</p>
+
+<p>Submitted by {{ total_submissions }} student(s).</p>
 
 <table>
     <thead>

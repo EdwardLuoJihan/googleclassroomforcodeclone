@@ -10,7 +10,7 @@ from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt(app)
 
-UPLOAD_FOLDER = 'assignments/submissions'
+UPLOAD_FOLDER = 'assignments/submissions/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/reset")
@@ -356,5 +356,7 @@ def view_submissions(assignment_id):
     submissions = Submission.query.filter_by(assignment_id=assignment_id).all()
 
     total_submissions = len(submissions)
+    print(submissions)
+    print(total_submissions)
 
     return render_template('view_submissions.html', assignment=assignment, submissions=submissions, total_submissions=total_submissions)
