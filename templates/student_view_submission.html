@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>My Submissions for Assignment: {{ assignment.title }}</h1>
+    <p>Description: {{ assignment.description }}</p>
+    <p>Deadline: {{ assignment.deadline.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+
+    {% if submissions|length == 0 %}
+        <p>You haven't submitted anything for this assignment yet.</p>
+    {% else %}
+        <ul>
+            {% for submission in submissions %}
+                <li>
+                    <strong>Submission Date:</strong> {{ submission.timestamp }} <br>
+                    <strong>Grade:</strong> {{ submission.grade or 'Not graded yet' }} <br>
+                    <strong>Feedback:</strong> {{ submission.feedback or 'No feedback yet' }} <br>
+                    
+                    <!-- Links to download the HTML, CSS, and JS files -->
+                    <a href="{{ url_for('download_file', filename=submission.html_file) }}" class="btn">Download HTML</a>
+                    <a href="{{ url_for('download_file', filename=submission.css_file) }}" class="btn">Download CSS</a>
+                    <a href="{{ url_for('download_file', filename=submission.js_file) }}" class="btn">Download JS</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

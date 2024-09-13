@@ -7,6 +7,8 @@ from werkzeug.utils import secure_filename
 import os
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_bcrypt import Bcrypt
+from flask import current_app
+from flask import send_from_directory, abort
 
 bcrypt = Bcrypt(app)
 
@@ -264,7 +266,7 @@ def view_assignments(class_id):
 @app.before_request
 def restrict_teacher_access():
     if current_user.is_authenticated and current_user.role != 'teacher':
-        if request.endpoint in ['create_class']:
+        if request.endpoint in ['create_class', 'view_submissions']:
             flash('Access denied.', 'danger')
             return redirect(url_for('index'))
         
@@ -360,3 +362,37 @@ def view_submissions(assignment_id):
     print(total_submissions)
 
     return render_template('view_submissions.html', assignment=assignment, submissions=submissions, total_submissions=total_submissions)
+
+@app.route('/student/view_submission/<int:assignment_id>')
+@login_required
+def student_view_submission(assignment_id):
+    if current_user.role != 'student':
+        flash('Access denied.', 'danger')
+        return redirect(url_for('index'))
+
+    # Fetch student's submissions for this assignment
+    assignment = Assignment.query.get_or_404(assignment_id)
+    submissions = Submission.query.filter_by(student_id=current_user.id, assignment_id=assignment_id).all()
+
+    # Check if there are submissions
+    if not submissions:
+        flash('No submissions found for this assignment.', 'info')
+    
+    return render_template('student_view_submission.html', submissions=submissions, assignment=assignment)
+
+import os
+
+@app.route('/download/<path:filename>')
+@login_required
+def download_file(filename):
+    # Extract just the filename part, ignoring any preceding paths
+    filename_only = os.path.basename(filename)
+
+    # Print the extracted filename for debugging
+    print("Extracted filename: ", filename_only)
+
+    # Check if the file exists in the upload folder
+    if os.path.exists(os.path.join(current_app.config['UPLOAD_FOLDER'], filename_only)):
+        return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename_only, as_attachment=True)
+    else:
+        abort(404)  # Return 404 if the file does not exist
