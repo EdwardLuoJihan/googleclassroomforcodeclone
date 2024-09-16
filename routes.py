@@ -12,7 +12,7 @@ from flask import send_from_directory, abort
 
 bcrypt = Bcrypt(app)
 
-UPLOAD_FOLDER = 'assignments/submissions/'
+UPLOAD_FOLDER = './assignments/submissions/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/reset")

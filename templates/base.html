@@ -1,48 +1,51 @@
-{% with messages = get_flashed_messages(with_categories=True) %}
-    {% if messages %}
-        <div class="flashes">
-            {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
-{% endwith %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask Coding Assignment App</title>
+    <title>Code Portal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <!-- <script src="{{ url_for('static', filename='scripts.js') }}" defer></script> -->
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Home</a></li>
+        <nav class="navbar">
+            <div class="navbar-logo">Code Portal</div>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    <div class="flashes">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <div class="navbar-menu">
+                <a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' else '' }}">Home</a>
                 {% if current_user.is_authenticated %}
                     {% if current_user.role == 'teacher' %}
-                        <li><a href="{{ url_for('teacher_dashboard') }}">Teacher Dashboard</a></li>
+                        <a href="{{ url_for('teacher_dashboard') }}" class="{{ 'active' if request.endpoint in ['teacher_dashboard', 'create_assignment', 'view_assignments', 'view_submissions', 'view_submission'] else '' }}">Teacher Dashboard</a>
                     {% elif current_user.role == 'student' %}
-                        <li><a href="{{ url_for('student_dashboard') }}">Student Dashboard</a></li>
+                        <a href="{{ url_for('student_dashboard') }}" class="{{ 'active' if request.endpoint in ['student_dashboard', 'view_assignments', 'submit_assignment'] or request.endpoint.startswith('student_') else '' }}">Student Dashboard</a>
                     {% endif %}
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    <a href="{{ url_for('logout') }}" class="{{ 'active' if request.endpoint == 'logout' else '' }}">Logout</a>
                 {% else %}
-                    <li><a href="{{ url_for('login') }}">Login</a></li>
-                    <li><a href="{{ url_for('register') }}">Register</a></li>
+                    <a href="{{ url_for('login') }}" class="{{ 'active' if request.endpoint == 'login' else '' }}">Login</a>
+                    <a href="{{ url_for('register') }}" class="{{ 'active' if request.endpoint == 'register' else '' }}">Register</a>
                 {% endif %}
-            </ul>
+            </div>
         </nav>
     </header>
     <main>
         {% block content %}{% endblock %}
     </main>
     <footer>
-        <p>&copy; {{ year }} Flask Coding Assignment App</p>
+        <br>
+        <p>Website Built By Edward Luo</p>
+        <p>&copy; {{ year }} Code Portal </p>
     </footer>
 </body>
 </html>
+ 

@@ -15,10 +15,7 @@
         </div>
         <div class="form-group">
             {{ form.confirm_password.label }}<br>
-            {{ form.confirm_password(size=32) }}<br>
-            {% for error in form.confirm_password.errors %}
-                <span class="error">{{ error }}</span><br>
-            {% endfor %}
+            {{ form.confirm_password }}<br>
         </div>
         <div class="form-group">
             {{ form.class_code.label }} {{ form.class_code() }}

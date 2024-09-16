@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+@font-face {
+    font-family: 'Roboto';
+    src: url(../fonts/roboto/Roboto-Regular.ttf);
+}
+
 /* CSS Reset */
 * {
     margin: 0;
@@ -6,9 +13,96 @@
 }
 
 html, body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    overflow: hidden;
 }
 
+/* Navigation bar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.7em;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    color: rgba(0,0,0,.87); 
+    padding: 0 40px;
+    height: 4.5rem;
+    border-bottom: .08rem solid #000000;
+}
+
+.flashes {
+    font-size: 1.5rem;
+    border-radius: 4px;
+    /* border: .08rem solid black; */
+    padding: .5rem 1.2rem;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.navbar-logo {
+    margin-left: .625rem;
+    font-size: 2.75rem;
+    font-weight: 400;
+    line-height: 2.75rem;
+    color: rgba(0,0,0,.87);
+    letter-spacing: .02rem;
+}
+
+.navbar-menu {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-menu a {
+    transition: all cubic-bezier(.4,0,.2,1) .24s;
+    color: black; /* White text */
+    text-decoration: none;
+    margin: 0 2rem;
+    font-size: 1.3rem;
+    padding: .5rem 1.2rem;
+    border-radius: 4px;
+    border: .08rem solid black;
+}
+
+.navbar-menu a:hover {
+    background-color: black; /* Darker background on hover */
+    color: white; /* Slightly lighter text */
+}
+
+.navbar-menu .active {
+    background-color: black; /* Blue background for active item */
+    color: #ffffff; /* White text */
+}
+
+.navbar-menu .active:hover {
+    background-color: white; /* Blue background for active item */
+    color: black; /* White text */
+}
+
+main {
+    margin-top: 8rem;
+}
+
+.index {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+footer {
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
