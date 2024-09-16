@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Create Assignment for Class: {{ class_.name }}</h1>
+<div class="center-container create-assignment">
+    <h2>Create Assignment for Class: <span>{{ class_.class_code }}</span></h2>
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <div>
@@ -25,8 +26,9 @@
                 <span class="text-danger">{{ error }}</span><br>
             {% endfor %}
         </div>
-        <div>
+        <div class="submitbtn">
             {{ form.submit() }}
         </div>
     </form>
+    </div>
 {% endblock %}

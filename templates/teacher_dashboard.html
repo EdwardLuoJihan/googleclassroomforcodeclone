@@ -1,14 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>Teacher Dashboard</h2>
-    <h3>Your Classes</h3>
-    <ul>
+<div class="center-container teacher-dashboard">
+    <h2>Your Classes</h2>
+    <div class="box-container">
         {% for class_ in classes %}
-            <li>
-                {{ class_.class_code }}
-                <a href="{{ url_for('create_assignment', class_id=class_.id) }}">Create Assignment</a>
-                <a href="{{ url_for('view_assignments', class_id=class_.id) }}">View Assignments</a>
-            </li>
+            <div class="box">
+                <p>{{ class_.class_code }}</p>
+                <br>
+                <a class="link" href="{{ url_for('create_assignment', class_id=class_.id) }}">Create Assignment</a>
+                <br><br>
+                <a class='link' href="{{ url_for('view_assignments', class_id=class_.id) }}">View Assignments</a>
+            </div>
         {% endfor %}
-    </ul>
+        </div>
+</div>
 {% endblock %}

@@ -5,7 +5,15 @@
         <br>
     <p>Manage assignments, submit work, and grade submissions.</p>
     <br>
-    <p>Sign in to use the app</p>
+    {% if current_user.is_authenticated %}
+        {% if current_user.role == 'teacher' %}
+            <p>Visit the <a class="link" href="{{ url_for('teacher_dashboard') }}">teacher dashboard</a> to get started</p>
+        {%else%}
+            <p>Visit the <a class="link" href="{{ url_for('student_dashboard') }}">student dashboard</a> to get started</p>
+        {%endif%}    
+    {%else%} 
+        <p>Sign in to use the app</p>
+    {%endif%}
     </div>
     
 {% endblock %}
