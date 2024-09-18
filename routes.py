@@ -357,7 +357,9 @@ def view_submissions(assignment_id):
     assignment = Assignment.query.get_or_404(assignment_id)
     submissions = Submission.query.filter_by(assignment_id=assignment_id).all()
 
-    total_submissions = len(submissions)
+
+    unique_student_ids = {submission.student_id for submission in submissions}
+    total_submissions = len(unique_student_ids)
     print(submissions)
     print(total_submissions)
 
