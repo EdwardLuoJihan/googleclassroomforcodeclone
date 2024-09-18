@@ -52,6 +52,7 @@ html, body {
     color: black;
     text-decoration: none;
     position: relative;
+    z-index: 2;
     font-size: 1.5rem;
 }
 
@@ -81,6 +82,7 @@ html, body {
     top: 0;
     width: 100%;
     background-color: white;
+    z-index: 9;
     color: rgba(0,0,0,.87); 
     padding: 0 40px;
     height: 4.5rem;
@@ -149,30 +151,35 @@ main {
 }
 
 .center-container {
-    position: absolute;
-    top: 50%;
+    /* top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
+    
     text-align: center;
     font-size: 1.5rem;
+    margin: auto;
+    width: 80%;
 }
 
 footer {
-    position: absolute;
+    position: fixed;
     bottom: 2%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    left: 2%;
+    text-align: left;
 }
 
 
 .teacher-dashboard {
-    bottom: 0%;
+    margin-top: 5rem;
 }
 
 .teacher-dashboard .box-container {
     display: flex;
-
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }
 
 .teacher-dashboard .box {
@@ -211,3 +218,48 @@ footer {
     background:rgba(255, 247, 0, 0.706)
 }
 
+
+.assignment-box {
+    margin: 2rem;
+}
+
+.assignment-box-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.view-assignments {
+    top: 25%;
+    margin-top: 5rem;
+}
+
+.iconlink {
+    border: none!important;
+    background: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0!important;
+    border-radius: 9999px!important;
+    vertical-align: middle;
+    justify-content: center;
+    margin: 1rem!important;
+}
+
+.iconlink:hover {
+    background-color: #46464641!important;
+}
+
+.iconlink svg {
+    height: max-content;
+    width: 80%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    vertical-align: middle;
+}

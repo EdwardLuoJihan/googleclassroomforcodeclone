@@ -18,28 +18,28 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route("/reset")
 def reset():
     try:
-        db.session.query(Assignment).delete()
-        db.session.commit()
-        # Delete all records from the users table
-        User.query.delete()
-        db.session.commit()
-        print("All users have been deleted.")
-        # Create the admin user
+        # db.session.query(Assignment).delete()
+        # db.session.commit()
+        # # Delete all records from the users table
+        # User.query.delete()
+        # db.session.commit()
+        # print("All users have been deleted.")
+        # # Create the admin user
         admin = User(
-            username='admin',
-            email='admin@admin.com',
+            username='teacher',
+            email='teacher@admin.com',
             role='teacher'
         )
-        admin.set_password('admin123')
-        testuser = User(
-            username='test',
-            email='test@test.com',
-            role='student'
-        )
-        testuser.set_password('test')
+        admin.set_password('teacher')
+        # testuser = User(
+        #     username='test',
+        #     email='test@test.com',
+        #     role='student'
+        # )
+        # testuser.set_password('test')
 
         db.session.add(admin)
-        db.session.add(testuser)
+        # db.session.add(testuser)
         db.session.commit()
         print("DONE")
     except:

@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Portal</title>
+    <title>CodePorTao</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <!-- <script src="{{ url_for('static', filename='scripts.js') }}" defer></script> -->
 </head>
 <body>
     <header>
         <nav class="navbar">
-            <div class="navbar-logo">Code Portal</div>
+            <div class="navbar-logo">CodePorTao</div>
             {% with messages = get_flashed_messages(with_categories=True) %}
                 {% if messages %}
                     <div class="flashes">
@@ -26,11 +26,22 @@
                 <a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' else '' }}">Home</a>
                 {% if current_user.is_authenticated %}
                     {% if current_user.role == 'teacher' %}
-                        <a href="{{ url_for('teacher_dashboard') }}" class="{{ 'active' if request.endpoint in ['teacher_dashboard', 'create_assignment', 'view_assignments', 'view_submissions', 'view_submission'] else '' }}">Teacher Dashboard</a>
-                    {% elif current_user.role == 'student' %}
-                        <a href="{{ url_for('student_dashboard') }}" class="{{ 'active' if request.endpoint in ['student_dashboard', 'view_assignments', 'submit_assignment'] or request.endpoint.startswith('student_') else '' }}">Student Dashboard</a>
-                    {% endif %}
-                    <a href="{{ url_for('logout') }}" class="{{ 'active' if request.endpoint == 'logout' else '' }}">Logout</a>
+                        <a href="{{ url_for('teacher_dashboard') }}" class="{{ 'active' if request.endpoint in ['teacher_dashboard', 'create_assignment', 'view_assignments', 'view_submissions', 'view_submission', 'create_class'] else '' }}">Teacher Dashboard</a>
+                        <a href="{{ url_for('logout') }}" class="{{ 'active' if request.endpoint == 'logout' else '' }}">Logout</a>
+                        <a href="{{ url_for('create_class') }}" class="iconlink">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 12H18M12 6V18" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </a>
+                        {% elif current_user.role == 'student' %}
+                        <a href="{{ url_for('student_dashboard') }}" class="{{ 'active' if request.endpoint in ['student_dashboard', 'view_assignments', 'submit_assignment', 'join_class'] or request.endpoint.startswith('student_') else '' }}">Student Dashboard</a>
+                        <a href="{{ url_for('logout') }}" class="{{ 'active' if request.endpoint == 'logout' else '' }}">Logout</a>
+                        <a href="{{ url_for('join_class') }}" class="iconlink">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 12H18M12 6V18" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </a>
+                        {% endif %}
                 {% else %}
                     <a href="{{ url_for('login') }}" class="{{ 'active' if request.endpoint == 'login' else '' }}">Login</a>
                     <a href="{{ url_for('register') }}" class="{{ 'active' if request.endpoint == 'register' else '' }}">Register</a>
@@ -44,7 +55,7 @@
     <footer>
         <br>
         <p>Website Built By Edward Luo</p>
-        <p>&copy; {{ year }} Code Portal </p>
+        <p>&copy; {{ year }} CodePorTao </p>
     </footer>
 </body>
 </html>
