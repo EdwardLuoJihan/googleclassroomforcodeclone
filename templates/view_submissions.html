@@ -26,7 +26,15 @@
             <td>{{ submission.grade }}</td>
             <td class="feedback">{{ submission.feedback }}</td>
             <td>
-                <a class="link green" href="{{ url_for('view_submission', submission_id=submission.id) }}">Mark</a>
+                {% if submission.grade == None and submission.feedback == None %}
+                    <a class="link green" href="{{ url_for('view_submission', submission_id=submission.id) }}">Mark</a>
+                {% else %}
+                    <a class="link yellow" href="{{ url_for('view_submission', submission_id=submission.id) }}">Edit</a>
+                {% endif %}
+                |
+                <form action="{{ url_for('delete_submission', submission_id=submission.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btnlink link red" onclick="return confirm('Are you sure you want to delete this submission?');">Delete</button>
+                </form>
             </td>
         </tr>
         {% endfor %}

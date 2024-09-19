@@ -58,17 +58,7 @@ def register():
 
     form = RegistrationForm()
 
-    print(form.errors)
-
-    if form.is_submitted():
-        print("submitted")
-
-    if form.validate():
-        print("valid")
-
-    print(form.errors)
     if form.validate_on_submit():
-        print("SUBMITTED")
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, email=form.email.data, password_hash=hashed_password, role='student')
         db.session.add(user)
@@ -97,7 +87,6 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        print(user.username + "logged in")
         if user and bcrypt.check_password_hash(user.password_hash, form.password.data):
             login_user(user)
             return redirect(url_for('index'))
@@ -155,6 +144,7 @@ def view_submission(submission_id):
         submission.feedback = request.form['feedback']
         db.session.commit()
         flash('Grade submitted successfully!', 'success')
+        return redirect(url_for('view_submissions', assignment_id=submission.assignment_id))
 
     return render_template('submission_view.html', submission=submission, html_content=html_content, css_content=css_content, js_content=js_content)
 
@@ -248,7 +238,6 @@ def teacher_dashboard():
         return redirect(url_for('index'))
 
     classes = Class.query.all()
-    print(current_user.username)
     return render_template('teacher_dashboard.html', classes=classes)
 
 @app.route('/view_assignments/<int:class_id>')
@@ -360,8 +349,6 @@ def view_submissions(assignment_id):
 
     unique_student_ids = {submission.student_id for submission in submissions}
     total_submissions = len(unique_student_ids)
-    print(submissions)
-    print(total_submissions)
 
     return render_template('view_submissions.html', assignment=assignment, submissions=submissions, total_submissions=total_submissions)
 
@@ -390,11 +377,16 @@ def download_file(filename):
     # Extract just the filename part, ignoring any preceding paths
     filename_only = os.path.basename(filename)
 
-    # Print the extracted filename for debugging
-    print("Extracted filename: ", filename_only)
-
     # Check if the file exists in the upload folder
     if os.path.exists(os.path.join(current_app.config['UPLOAD_FOLDER'], filename_only)):
         return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename_only, as_attachment=True)
     else:
         abort(404)  # Return 404 if the file does not exist
+
+@app.route('/submission/delete/<submission_id>', methods=['POST'])
+def delete_submission(submission_id):
+    submission = Submission.query.get_or_404(submission_id)
+    db.session.delete(submission)
+    db.session.commit()
+    flash('Submission deleted successfully!', 'success')
+    return redirect(url_for('view_submissions', assignment_id=submission.assignment_id))

@@ -13,10 +13,10 @@
                         <h2>{{ assignment.title }}</h2>
                         <p>Due: {{ assignment.deadline }}</p>
                         {% if current_user.role == 'teacher' or current_user.role == 'admin' %}
-                        <a class="link" href="{{ url_for('view_submissions', assignment_id=assignment.id) }}" class="btn">View Submissions</a>
+                        <a class="link " href="{{ url_for('view_submissions', assignment_id=assignment.id) }}" class="btn">View Submissions</a>
                         {% else %}
-                        <a class="link" href="{{ url_for('submit_assignment', assignment_id=assignment.id) }}" class="btn">Submit</a>
-                        <a class="link" href="{{ url_for('student_view_submission', assignment_id=assignment.id) }}" class="btn">View My Submissions</a>
+                        <a class="link orange" href="{{ url_for('submit_assignment', assignment_id=assignment.id) }}" class="btn">Submit</a>
+                        <a class="link orange" href="{{ url_for('student_view_submission', assignment_id=assignment.id) }}" class="btn">View My Submissions</a>
                         {% endif %}
                         <!-- Optionally add other details or links -->
                     </div>

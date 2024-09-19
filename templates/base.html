@@ -13,7 +13,7 @@
             <div class="navbar-logo"><span class="tao1">Code</span>Por<span class="tao">Tao</span></div>
             {% with messages = get_flashed_messages(with_categories=True) %}
                 {% if messages %}
-                    <div class="flashes">
+                    <div class="flashes" id="flashes">
                         {% for category, message in messages %}
                             <div class="alert alert-{{ category }}">
                                 {{ message }}
@@ -62,8 +62,22 @@
     </footer>
     <script>
         function goBack() {
-          window.history.back();
+            if (document.referrer) {
+                window.history.back();  // Use back if there's a history
+            } else {
+                window.location.href = '/';  // Redirect to homepage (or any default page) if no referrer is available
+            }
         }
+    </script>
+    <script>
+        setTimeout(function() {
+            const flashContainer = document.getElementById('flashes');
+            if (flashContainer) {
+                flashContainer.style.transition = 'opacity 1s';
+                flashContainer.style.opacity = '0';
+                setTimeout(() => flashContainer.remove(), 1000);  // Wait until fade-out transition ends
+            }
+        }, 3000);  // 3 seconds delay before fade out
     </script>
 </body>
 </html>

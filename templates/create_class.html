@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>Create a New Class</h2>
+<div class="center-container">
+    <h2>Create a New Class</h2><br>
     <form method="POST">
         {{ form.hidden_tag() }}
         <div class="form-group">
-            {{ form.class_code.label }} {{ form.class_code() }}
-        </div>
+            {{ form.class_code.label }} <br><br>{{ form.class_code() }}
+        </div><br>
         <button type="submit" class="btn btn-primary">Create Class</button>
     </form>
+</div>
 {% endblock %}

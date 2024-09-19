@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>Join a Class</h2>
+<div class="center-container">
+    <h2>Join a Class</h2><br>
     <form method="POST">
         <div class="form-group">
-            <label for="class_code">Class Code:</label>
+            <label for="class_code">Class Code:</label><br><br>
             <input type="text" class="form-control" id="class_code" name="class_code" required>
-        </div>
+        </div><br>
         <button type="submit" class="btn btn-primary">Join Class</button>
     </form>
+</div>
 {% endblock %}
