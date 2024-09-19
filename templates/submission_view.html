@@ -1,17 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="center-container">
     <h2>Submission for {{ submission.assignment.title }}</h2>
 
     
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Student Submission</title>
-    </head>
-    <body>
-        <iframe id="student-website" style="width:100%; height:600px; border:1px solid #000;"></iframe>
+    
+        <iframe id="student-website" style="width:100%; height:600px; border:0.08rem solid #000;border-radius: 4px"></iframe>
         <script>
             const htmlContent = `{{html_content | safe}}`;
             const cssContent = `{{css_content | safe}}`;
@@ -20,18 +14,17 @@
         <script src="{{ url_for('static', filename='js/iframe.js') }}" defer></script>
         <form method="POST">
             <div class="form-group">
-                <label for="grade">Grade:</label>
+                <label for="grade">Grade</label><br>
                 <input type="text" class="form-control" id="grade" name="grade" value="{{ submission.grade }}">
-            </div>
+            </div><br>
             <div class="form-group">
-                <label for="feedback">Feedback:</label>
-                <textarea class="form-control" id="feedback" name="feedback">{{ submission.feedback }}</textarea>
+                <label for="feedback">Feedback</label><br>
+                <textarea style="width: 30%" class="form-control" id="feedback" name="feedback">{{ submission.feedback }}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit Grade</button>
         </form>
-    </body>
-    </html>
-    
+
+    </div>
 
     
 {% endblock %}

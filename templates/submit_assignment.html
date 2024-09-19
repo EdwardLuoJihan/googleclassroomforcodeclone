@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>Submit Assignment: {{ assignment.title }}</h2>
+<div class="center-container">
+    <h2>Submit Assignment: {{ assignment.title }}</h2><br>
     <form method="POST" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <div class="form-group">
-            {{ form.html_file.label }} {{ form.html_file() }}
+            {{ form.html_file.label }} <br>{{ form.html_file() }} <br><br>
         </div>
         <div class="form-group">
-            {{ form.css_file.label }} {{ form.css_file() }}
+            {{ form.css_file.label }} <br>{{ form.css_file() }} <br><br>
         </div>
         <div class="form-group">
-            {{ form.js_file.label }} {{ form.js_file() }}
+            {{ form.js_file.label }} <br>{{ form.js_file() }} <br><br>
         </div>
         <button type="submit" class="btn btn-primary">Submit Assignment</button>
     </form>
+</div>
 {% endblock %}

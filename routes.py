@@ -114,7 +114,7 @@ def submit_assignment(assignment_id):
         flash('Assignment submitted successfully!', 'success')
         return redirect(url_for('student_dashboard'))
     
-    return render_template('assignment_detail.html', form=form, assignment=assignment)
+    return render_template('submit_assignment.html', form=form, assignment=assignment)
 
 def save_file(file, ext, student_id, assignment_id):
     filename = secure_filename(f"student_{student_id}_assignment_{assignment_id}.{ext}")

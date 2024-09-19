@@ -3,4 +3,14 @@
     height: 100px;
     background: blue;
     border-radius: 999px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all .4s ease;
+}
+
+.ball:hover {
+    border-radius: 0px;
+    background-color: red;
 }

@@ -1,25 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>My Submissions for Assignment: {{ assignment.title }}</h1>
-    <p>Description: {{ assignment.description }}</p>
-    <p>Deadline: {{ assignment.deadline.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+<div class="center-container">
+    <h2>My Submissions for Assignment: {{ assignment.title }}</h2><br>
+    <p>Description: {{ assignment.description }}</p><br>
+    <p>Due on: {{ assignment.deadline.strftime('%Y-%m-%d %H:%M:%S') }}</p><br>
 
     {% if submissions|length == 0 %}
         <p>You haven't submitted anything for this assignment yet.</p>
     {% else %}
-        <ul>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Submission Time</th>
+                <th>Grade</th>
+                <th>Feedback</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for submission in submissions %}
-                <li>
-                    <strong>Submission Date:</strong> {{ submission.timestamp }} <br>
-                    <strong>Grade:</strong> {{ submission.grade or 'Not graded yet' }} <br>
-                    <strong>Feedback:</strong> {{ submission.feedback or 'No feedback yet' }} <br>
-                    
+            <tr>
+                <td>{{ submission.timestamp }}</td>
+                <td>{{ submission.grade or 'Not graded yet' }}</td>
+                <td>{{ submission.feedback or 'No feedback yet' }}</td>
+                <td>
                     <!-- Links to download the HTML, CSS, and JS files -->
-                    <a href="{{ url_for('download_file', filename=submission.html_file) }}" class="btn">Download HTML</a>
-                    <a href="{{ url_for('download_file', filename=submission.css_file) }}" class="btn">Download CSS</a>
-                    <a href="{{ url_for('download_file', filename=submission.js_file) }}" class="btn">Download JS</a>
-                </li>
+                    <a class="link orange" href="{{ url_for('download_file', filename=submission.html_file) }}" class="btn">Download HTML</a>
+                    <a class="link" href="{{ url_for('download_file', filename=submission.css_file) }}" class="btn">Download CSS</a>
+                    <a class="link yellow" href="{{ url_for('download_file', filename=submission.js_file) }}" class="btn">Download JS</a>
+                </td>
+            </tr>
             {% endfor %}
-        </ul>
+        </tbody>
+    </table>
     {% endif %}
+</div>
 {% endblock %}
