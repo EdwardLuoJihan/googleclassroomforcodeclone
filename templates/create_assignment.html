@@ -2,33 +2,33 @@
 
 {% block content %}
 <div class="center-container create-assignment">
-    <h2>Create Assignment for Class: <span>{{ class_.class_code }}</span></h2>
+    <h2>Create Assignment for Class: <span>{{ class_.class_code }}</span></h2><br>
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <div>
-            {{ form.name.label }}<br>
-            {{ form.name(size=32) }}<br>
+            {{ form.name.label }}<br><br>
+            {{ form.name(size=32) }}<br><br>
             {% for error in form.name.errors %}
-                <span class="text-danger">{{ error }}</span><br>
+                <span class="text-danger">{{ error }}</span><br><br>
             {% endfor %}
         </div>
         <div>
-            {{ form.description.label }}<br>
+            {{ form.description.label }}<br><br>
             {{ form.description(rows=4, cols=32) }}<br>
             {% for error in form.description.errors %}
                 <span class="text-danger">{{ error }}</span><br>
             {% endfor %}
         </div>
-        <div>
-            {{ form.due_date.label }}<br>
-            {{ form.due_date() }}<br>
+        <div><br>
+            {{ form.due_date.label }}<br><br>
+            {{ form.due_date() }}<br><br>
             {% for error in form.due_date.errors %}
                 <span class="text-danger">{{ error }}</span><br>
             {% endfor %}
         </div>
         <div class="submitbtn">
             {{ form.submit() }}
-        </div>
+        </div><br>
     </form>
     </div>
 {% endblock %}

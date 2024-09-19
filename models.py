@@ -35,6 +35,7 @@ class Class(db.Model):
 class Assignment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
+    type = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
     deadline = db.Column(db.DateTime, nullable=False)
     class_id = db.Column(db.Integer, db.ForeignKey('class.id'), nullable=False)

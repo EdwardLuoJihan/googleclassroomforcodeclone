@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="center-container">
-    <h2>Submission for {{ submission.assignment.title }}</h2>
+    <h2>Submission for {{ submission.assignment.title }}</h2><br>
 
     
     
@@ -13,14 +13,14 @@
         </script>
         <script src="{{ url_for('static', filename='js/iframe.js') }}" defer></script>
         <form method="POST">
-            <div class="form-group">
-                <label for="grade">Grade</label><br>
+            <div class="form-group"><br>
+                <label for="grade">Grade</label><br><br>
                 <input type="text" class="form-control" id="grade" name="grade" value="{{ submission.grade }}">
             </div><br>
             <div class="form-group">
-                <label for="feedback">Feedback</label><br>
+                <label for="feedback">Feedback</label><br><br>
                 <textarea style="width: 30%" class="form-control" id="feedback" name="feedback">{{ submission.feedback }}</textarea>
-            </div>
+            </div><br>
             <button type="submit" class="btn btn-primary">Submit Grade</button>
         </form>
 
