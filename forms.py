@@ -43,3 +43,7 @@ class AssignmentForm(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired()])
     due_date = DateField('Due Date', format='%Y-%m-%d', validators=[DataRequired()])
     submit = SubmitField('Create Assignment')
+
+class MessageForm(FlaskForm):
+    content = TextAreaField('Message', validators=[DataRequired()])
+    submit = SubmitField('Send Message')

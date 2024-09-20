@@ -1,8 +1,8 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db, bcrypt
-from models import User, Assignment, Submission, Class
+from models import User, Assignment, Submission, Class, Message
 from forms import RegistrationForm, LoginForm
-from forms import AssignmentSubmissionForm, ClassCreationForm, AssignmentForm
+from forms import AssignmentSubmissionForm, ClassCreationForm, AssignmentForm, MessageForm
 from werkzeug.utils import secure_filename
 import os
 from flask_login import login_user, logout_user, current_user, login_required
@@ -390,3 +390,32 @@ def delete_submission(submission_id):
     db.session.commit()
     flash('Submission deleted successfully!', 'success')
     return redirect(url_for('view_submissions', assignment_id=submission.assignment_id))
+
+@app.route('/create_message/<int:class_id>', methods=['GET', 'POST'])
+@login_required
+def create_message(class_id):
+    if current_user.role != 'teacher':
+        flash('Access denied.', 'danger')
+        return redirect(url_for('index'))
+
+    # Fetch the class object
+    class_ = Class.query.get_or_404(class_id)
+    
+    form = MessageForm()
+    if form.validate_on_submit():
+        message = Message(content=form.content.data, class_id=class_id, teacher_id=current_user.id)
+        db.session.add(message)
+        db.session.commit()
+        flash('Message sent successfully!', 'success')
+        return redirect(url_for('view_class_feed', class_id=class_id))
+
+    # Pass the class object to the template
+    return render_template('create_message.html', form=form, class_=class_)
+
+
+@app.route('/class_feed/<int:class_id>', methods=['GET'])
+@login_required
+def view_class_feed(class_id):
+    class_ = Class.query.get_or_404(class_id)
+    messages = Message.query.filter_by(class_id=class_id).order_by(Message.timestamp.desc()).all()
+    return render_template('class_feed.html', class_=class_, messages=messages)
