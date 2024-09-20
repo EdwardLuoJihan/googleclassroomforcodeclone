@@ -466,3 +466,39 @@ tr:last-child td {
 .smalltext {
     font-size: 1.2rem;
 }
+
+.message-container {
+    margin-top: 2rem;
+}
+
+.message-box {
+    padding: 2rem;  
+    border-radius: 4px;
+    border: 0.08rem solid black;
+    text-align: left;
+    font-size: 1.2rem;
+    margin: 2rem;
+}
+
+.message-box h2 {
+    color:rgb(167, 167, 167);
+    font-weight: 200;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-style: italic;
+}
+
+.message-box p {
+    font-family: 'Roboto';
+}
+
+.msgform textarea  {
+    font-family: 'Roboto';
+    border: 0.08rem solid black;
+    outline: none;
+    border-radius: 4px;
+    resize: none;
+    padding: 1.3rem;
+    width: 50%;
+    height: 20rem;
+}

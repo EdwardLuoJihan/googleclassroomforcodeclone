@@ -7,6 +7,7 @@
             <div class="box">
                 <p>{{ class_.class_code }}</p>
                 <br>
+                <a class='link ' href="{{ url_for('view_class_feed', class_id=class_.id) }}">View Feed</a><br><br>
                 <a class="link" href="{{ url_for('create_assignment', class_id=class_.id) }}">Create Assignment</a>
                 <br><br>
                 <a class='link' href="{{ url_for('view_assignments', class_id=class_.id) }}">View Assignments</a>

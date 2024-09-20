@@ -2,11 +2,13 @@
 
 {% block content %}
     <h1>Send a Message to {{ class_.class_code }}</h1>
-    <form method="POST">
+    <br>
+    <form method="POST" class="msgform">
         {{ form.hidden_tag() }}
-        <div>{{ form.content.label() }}</div>
+        <div>{{ form.content.label() }}</div><br>
         <div>{{ form.content() }}</div>
+        <br>
         <div>{{ form.submit() }}</div>
-    </form>
-    <a href="{{ url_for('view_class_feed', class_id=class_.id) }}">Back to Class Feed</a>
+    </form><br>
+    <a class="link purple" href="{{ url_for('view_class_feed', class_id=class_.id) }}">Back to Class Feed</a>
 {% endblock %}

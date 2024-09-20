@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>CodePorTao</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <!-- <script src="{{ url_for('static', filename='scripts.js') }}" defer></script> -->
@@ -46,6 +47,7 @@
                     <a href="{{ url_for('login') }}" class="{{ 'active' if request.endpoint == 'login' else '' }}">Login</a>
                     <a href="{{ url_for('register') }}" class="{{ 'active' if request.endpoint == 'register' else '' }}">Register</a>
                 {% endif %}
+                <!-- <button id="modebtn">Toggle</button> -->
             </div>
         </nav>
     </header>
@@ -83,6 +85,24 @@
                 setTimeout(() => flashContainer.remove(), 1000);  // Wait until fade-out transition ends
             }
         }, 3000);  // 3 seconds delay before fade out
+    </script>
+    <script>
+        const button = document.querySelector("#modebtn");
+
+        var all = document.getElementsByTagName("*");
+
+        // Toggles the "dark-mode" class
+        function toggleDarkMode() {
+            for (var i=0, max=all.length; i < max; i++) {
+                all[i].classList.toggle("dark-mode");
+            }
+            
+        }
+
+        button.addEventListener("click", () => {
+
+            toggleDarkMode();
+        });
     </script>
 </body>
 </html>
